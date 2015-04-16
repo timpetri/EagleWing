@@ -1,7 +1,5 @@
 package tapetri;
 
-import heineman.klondike.MoveCardToFoundationMove;
-
 import java.awt.event.MouseEvent;
 
 import ks.common.controller.SolitaireReleasedAdapter;
@@ -25,19 +23,24 @@ public class EagleWingFoundationPileController extends SolitaireReleasedAdapter 
 	/** The specific Foundation pileView being controlled. */
 	protected PileView src;
 	
+	/** The trunk buildablePileView being used to automatic moves */
+	protected BuildablePileView trunkView;
+	
 	/**
 	 * 
 	 * EagleWingFoundationPileController constructor comment.
 	 */
-	public EagleWingFoundationPileController(EagleWing theGame, PileView foundation) {
+	public EagleWingFoundationPileController(EagleWing theGame, PileView foundation, BuildablePileView trunk) {
 		super(theGame);
 		
 		this.theGame = theGame;
 		this.src = foundation;
+		this.trunkView = trunk;
 	}
 
 	
 	public void mouseReleased(MouseEvent me) {
+
 		Container c = theGame.getContainer();
 
 		/** Return if there is no card being dragged chosen. */
@@ -80,7 +83,7 @@ public class EagleWingFoundationPileController extends SolitaireReleasedAdapter 
 			if (col.count() != 1) {
 				fromWidget.returnWidget (draggingWidget);  // return home
 			} else {
-				Move m = new MoveCardToFoundationMove (fromPile, col.peek(), foundation);
+				Move m = new MoveTrunkToFoundationMove (fromPile, col.peek(), foundation, theGame.rankOfFoundation.getValue());
 
 				if (m.doMove (theGame)) {
 					// Success
@@ -102,40 +105,43 @@ public class EagleWingFoundationPileController extends SolitaireReleasedAdapter 
 				return;
 			}
 			
-			// figure out if card comes from wastePile by reference check
-			boolean fromWastePile = (fromPile == theGame.wastePile);
 			
-			if (fromWastePile) {
-
-				// must use peek() so we don't modify col prematurely
+			if (theGame.isFromWastePile(fromPile)) {
+				// card comes from waste pile
 				Move m = new MoveWasteToFoundationMove (fromPile,  foundation, theCard, theGame.rankOfFoundation.getValue());
 				if (m.doMove (theGame)) {
 					// Success
 					theGame.pushMove (m);
+					
 				} else {
 					fromWidget.returnWidget (draggingWidget);
 				}
+				
 			} else {
-				// card comes from wing
+				
+				// card comes from wing pile
 				Move m = new MoveWingToFoundationMove (fromPile,  foundation, theCard, theGame.rankOfFoundation.getValue());
 				if (m.doMove (theGame)) {
 					// Success
 					theGame.pushMove (m);
+					
+					// release the dragging object, (this will reset dragSource)
+					//c.releaseDraggingObject();
+					
+					BuildablePile trunk = (BuildablePile) trunkView.getModelElement();
+					
+					Move m2 = new AutoTrunkToWingMove(trunk, fromPile);
+					if (m2.doMove(theGame)) {
+						theGame.pushMove(m2);
+					}
+					
+					
 				} else {
 					fromWidget.returnWidget (draggingWidget);
 				}
 				
 			}
 		}
-
-		// Ahhhh. Instead of dealing with multiple 'instanceof' difficulty, why don't we allow
-		// for multiple controllers to be set on the same widget? Each will be invoked, one
-		// at a time, until someone returns TRUE (stating that they are processing the event).
-		// Then we have controllers for each MOVE TYPE, not just for each entity. In this way,
-		// I wouldn't have to convert the CardView from wastePile into a ColumnView. I would
-		// still have to do some sort of instanceOf check, however, to validate: But if the
-		// instanceof failed, the controller could safely return and say NOT ME! See! There
-		// always is a way to avoid layered if statements in OO.
 
 		// release the dragging object, (this will reset dragSource)
 		c.releaseDraggingObject();
