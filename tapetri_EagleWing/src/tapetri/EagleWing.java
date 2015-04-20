@@ -181,7 +181,7 @@ public class EagleWing extends Solitaire {
 		model.addElement(trunk);
 
 		updateNumberCardsLeft(52);
-		//updateScore(0);
+		updateScore(1); // one card is already in a foundation pile
 
 		for (int i = 0; i < 13; i++) {
 			trunk.add(deck.get());

@@ -38,7 +38,7 @@ public class AutoTrunkToWingMove extends Move {
 		}
 		Card c = wing.get();
 		c.setFaceUp(false);
-		trunk.add(wing.get());
+		trunk.add(c);
 		return true;
 	}
 

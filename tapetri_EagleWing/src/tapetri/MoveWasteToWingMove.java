@@ -29,7 +29,7 @@ public class MoveWasteToWingMove extends Move {
 	@Override
 	public boolean undo(Solitaire game) {
 		wastePile.add(wing.get());
-		return false;
+		return true;
 	}
 
 	@Override

@@ -12,30 +12,46 @@ public class MoveTrunkToFoundationMove extends Move {
 	Pile foundation;
 	Card cardBeingDragged;
 	int rankOfFoundation;
-	
+
 	public MoveTrunkToFoundationMove(BuildablePile trunk, Card c, Pile foundation, int rankOfFound) {
 		this.trunk = trunk;
 		this.cardBeingDragged = c;
 		this.foundation = foundation;
 		rankOfFoundation = rankOfFound;
 	}
-	
+
 	@Override
 	public boolean doMove(Solitaire game) {
-		// TODO Auto-generated method stub
-		return false;
+		if (!valid(game)) { return false; }
+
+		foundation.add(cardBeingDragged);
+		game.updateScore(+1);
+		return true;
 	}
 
 	@Override
 	public boolean undo(Solitaire game) {
-		// TODO Auto-generated method stub
-		return false;
+		trunk.add(foundation.get());
+		game.updateScore(-1);
+		return true;
 	}
 
 	@Override
 	public boolean valid(Solitaire game) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
+		if (foundation.empty()) {
+			return cardBeingDragged.getRank() == rankOfFoundation;
+		}
+		else {
+			boolean sameSuit = cardBeingDragged.getSuit() == foundation.suit();
+			boolean oneRankAbove = ((cardBeingDragged.getRank() - foundation.rank()) % 13 == 1);
+
+			// deals with round-the-corner foundations
+			boolean aceOverKing = (cardBeingDragged.getRank() == Card.ACE && foundation.rank() == Card.KING);
+
+			return sameSuit && (oneRankAbove || aceOverKing);
+
+
+		}
+	}
 }
