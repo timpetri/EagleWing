@@ -43,7 +43,7 @@ public class EagleWing extends Solitaire {
 
 	@Override
 	public boolean hasWon() {
-		return false;
+		return this.score.getValue() == 52;
 	}
 
 	@Override
@@ -194,7 +194,8 @@ public class EagleWing extends Solitaire {
 		}
 
 		foundations[0].add(deck.get());
-
+		
+		// set foundation rank to be rank of first foundation card (dealt above)
 		rankOfFoundation = new MutableInteger("foundationRank", foundations[0].rank());
 		numRedeals = new MutableInteger("numRedeals", 0);
 
