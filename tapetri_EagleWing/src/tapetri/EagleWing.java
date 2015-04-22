@@ -195,9 +195,10 @@ public class EagleWing extends Solitaire {
 
 		foundations[0].add(deck.get());
 		
-		// set foundation rank to be rank of first foundation card (dealt above)
+		// 
 		rankOfFoundation = new MutableInteger("foundationRank", foundations[0].rank());
 		numRedeals = new MutableInteger("numRedeals", 0);
+		super.numLeft.setValue(deck.count());
 
 	}
 
@@ -210,6 +211,10 @@ public class EagleWing extends Solitaire {
 
 	public boolean isFromWastePile(Pile fromPile) {
 		return (fromPile == this.wastePile);
+	}
+	
+	public int getFoundRankValue() {
+		return this.rankOfFoundation.getValue();
 	}
 
 }

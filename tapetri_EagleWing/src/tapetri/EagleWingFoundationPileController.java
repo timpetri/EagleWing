@@ -59,6 +59,7 @@ public class EagleWingFoundationPileController extends SolitaireReleasedAdapter 
 			return;
 		}
 
+
 		// Determine the To Pile
 		Pile foundation = (Pile) src.getModelElement();
 
@@ -83,7 +84,7 @@ public class EagleWingFoundationPileController extends SolitaireReleasedAdapter 
 			if (col.count() != 1) {
 				fromWidget.returnWidget (draggingWidget);  // return home
 			} else {
-				Move m = new MoveTrunkToFoundationMove (fromPile, col.peek(), foundation, theGame.rankOfFoundation.getValue());
+				Move m = new MoveTrunkToFoundationMove (fromPile, col.peek(), foundation, theGame.getFoundRankValue());
 
 				if (m.doMove (theGame)) {
 					// Success
@@ -108,7 +109,7 @@ public class EagleWingFoundationPileController extends SolitaireReleasedAdapter 
 			
 			if (theGame.isFromWastePile(fromPile)) {
 				// card comes from waste pile
-				Move m = new MoveWasteToFoundationMove (fromPile,  foundation, theCard, theGame.rankOfFoundation.getValue());
+				Move m = new MoveWasteToFoundationMove (fromPile,  foundation, theCard, theGame.getFoundRankValue());
 				if (m.doMove (theGame)) {
 					// Success
 					theGame.pushMove (m);
@@ -120,7 +121,7 @@ public class EagleWingFoundationPileController extends SolitaireReleasedAdapter 
 			} else {
 				
 				// card comes from wing pile
-				Move m = new MoveWingToFoundationMove (fromPile,  foundation, theCard, theGame.rankOfFoundation.getValue());
+				Move m = new MoveWingToFoundationMove (fromPile,  foundation, theCard, theGame.getFoundRankValue());
 				if (m.doMove (theGame)) {
 					// Success
 					theGame.pushMove (m);

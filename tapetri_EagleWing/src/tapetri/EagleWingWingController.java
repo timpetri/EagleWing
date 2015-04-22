@@ -6,6 +6,7 @@ import ks.common.controller.SolitaireReleasedAdapter;
 import ks.common.model.Card;
 import ks.common.model.Move;
 import ks.common.model.Pile;
+import ks.common.view.BuildablePileView;
 import ks.common.view.CardView;
 import ks.common.view.Container;
 import ks.common.view.PileView;
@@ -92,11 +93,18 @@ public class EagleWingWingController extends SolitaireReleasedAdapter {
 			return;
 		}
 
-		/** Recover the from BuildablePile OR waste Pile */
+		
 		Widget fromWidget = c.getDragSource();
 		if (fromWidget == null) {
 			System.err.println ("FoundationController::mouseReleased(): somehow no dragSource in container.");
 			c.releaseDraggingObject();
+			return;
+		}
+		// this ensures that a trunk from trunk can't be placed in wing slot
+		else if (fromWidget instanceof BuildablePileView) {
+			fromWidget.returnWidget (draggingWidget);
+			c.releaseDraggingObject();
+			c.repaint();
 			return;
 		}
 
