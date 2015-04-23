@@ -15,6 +15,31 @@ import ks.common.view.IntegerView;
 import ks.common.view.PileView;
 import ks.launcher.Main;
 
+/**
+ * 
+ * @author Tim Petri | tapetri@wpi.edu
+ * Apr 23, 2015 2015
+ * 
+ * EagleWing plugin using Solitaire framwork provided by Professor Heineman.
+ * Made in Software Engineering (CS 3733) at Worcester Polytechnic Institute.
+ * 
+ * Layout: Deal thirteen cards in an upside down pile called the trunk. 
+ * Next deal eight cards face up into eight piles (one in each) called the wings piles.
+ * Lastly deal one card into the first out of four foundation piles.
+ * The rest of the cards form the deck.
+ * 
+ * Object: To place all cards in the four foundation piles by suit and in ranked order 
+ * starting from the rank of the initial foundation card. Cards are placed round-the-
+ * corner which means that 2's go on top of Aces.
+ * 
+ * Play: Deal cards from deck into waste pile and move cards from either the waste
+ * or wings in the corresponding foundation piles, when possible. As the wing piles get emptied
+ * they are refilled using the trunk to make sure that there is always one card in each wing pile.
+ * When the trunk has been emptied to its last card, it turned face up and can be played just like 
+ * any other card. Should a wing then be emptied, it remains empty and can be used to place cards
+ * from the waste pile.
+ * 
+ */
 public class EagleWing extends Solitaire {
 
 	MutableInteger rankOfFoundation;
@@ -148,8 +173,8 @@ public class EagleWing extends Solitaire {
 		container.addWidget (numLeftView);
 
 		rankOfFoundView = new IntegerView (rankOfFoundation);
-		rankOfFoundView.setFontSize(18);
-		rankOfFoundView.setBounds (60 + 2*ci.getWidth(), 20, 60, 20);
+		rankOfFoundView.setFontSize(22);
+		rankOfFoundView.setBounds (100 + 3*ci.getWidth(), 20, 60, 40);
 		container.addWidget (rankOfFoundView);
 
 		numRedealsView = new IntegerView (numRedeals);

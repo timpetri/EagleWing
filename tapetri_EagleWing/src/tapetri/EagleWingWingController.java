@@ -12,6 +12,13 @@ import ks.common.view.Container;
 import ks.common.view.PileView;
 import ks.common.view.Widget;
 
+/**
+ * 
+ * @author Tim Petri | tapetri@wpi.edu
+ * Apr 23, 2015 2015
+ *
+ * Controller for a wing pile view
+ */
 public class EagleWingWingController extends SolitaireReleasedAdapter {
 
 	/** The EagleWing game */
@@ -31,9 +38,6 @@ public class EagleWingWingController extends SolitaireReleasedAdapter {
 		this.src = wing;
 	}
 
-	//	public void mouseReleased (MouseEvent me) {
-	//		// a card has been moved from waste pile to wing
-	//	}
 
 	public void mousePressed (MouseEvent me) {
 		// The container manages several critical pieces of information; namely, it
@@ -100,7 +104,8 @@ public class EagleWingWingController extends SolitaireReleasedAdapter {
 			c.releaseDraggingObject();
 			return;
 		}
-		// this ensures that a trunk from trunk can't be placed in wing slot
+		
+		// ensure that a card from trunk can't be placed in wing slot
 		else if (fromWidget instanceof BuildablePileView) {
 			fromWidget.returnWidget (draggingWidget);
 			c.releaseDraggingObject();
@@ -111,8 +116,21 @@ public class EagleWingWingController extends SolitaireReleasedAdapter {
 		// Determine the To Pile
 		Pile wing = (Pile) src.getModelElement();
 
+		// Determine the From Pile
 		Pile fromPile = (Pile) fromWidget.getModelElement();
-
+		
+		/* check that card actually comes from waste pile, if not, release back 
+		 * while not doing this would still work and just add the feature of being able
+		 * to move cards between wing slots, it has no purpose and does not follow the
+		 * A1.Analysis I made.
+		 * */
+		if (!theGame.isFromWastePile(fromPile)) {
+			fromWidget.returnWidget (draggingWidget);
+			c.releaseDraggingObject();
+			c.repaint();
+			return;
+		}
+		
 		/** Must be the CardView widget being dragged. */
 		CardView cardView = (CardView) draggingWidget;
 		Card theCard = (Card) cardView.getModelElement();

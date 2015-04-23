@@ -7,6 +7,13 @@ import ks.common.model.Deck;
 import ks.common.model.Move;
 import ks.common.model.Pile;
 
+/**
+ * 
+ * @author Tim Petri | tapetri@wpi.edu
+ * Apr 23, 2015 2015
+ *
+ * Controller for the deck view
+ */
 public class EagleWingDeckController extends SolitaireReleasedAdapter {
 	/** The game. */
 	protected EagleWing theGame;

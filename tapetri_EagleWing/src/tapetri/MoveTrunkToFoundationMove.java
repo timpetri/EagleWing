@@ -6,6 +6,13 @@ import ks.common.model.Card;
 import ks.common.model.Move;
 import ks.common.model.Pile;
 
+/**
+ * 
+ * @author Tim Petri | tapetri@wpi.edu
+ * Apr 23, 2015 2015
+ * 
+ * Move class for moving a card in trunk to foundation
+ */
 public class MoveTrunkToFoundationMove extends Move {
 
 	BuildablePile trunk;

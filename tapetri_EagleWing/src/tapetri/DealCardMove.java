@@ -9,9 +9,10 @@ import ks.common.model.Pile;
 
 /**
  * 
- * @author timpetri
- * Move card from top of deck to top of waste pile.
+ * @author Tim Petri | tapetri@wpi.edu
+ * Apr 23, 2015 2015
  *
+ * Move class for dealing a new card to the waste pile
  */
 public class DealCardMove extends Move {
 	

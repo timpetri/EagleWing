@@ -10,6 +10,14 @@ import ks.common.view.ColumnView;
 import ks.common.view.Container;
 import ks.common.view.Widget;
 
+
+/**
+ * 
+ * @author Tim Petri | tapetri@wpi.edu
+ * Apr 23, 2015 2015
+ *
+ * Controller for the trunk view
+ */
 public class EagleWingTrunkController extends SolitaireReleasedAdapter {
 
 	/** The EagleWing game */

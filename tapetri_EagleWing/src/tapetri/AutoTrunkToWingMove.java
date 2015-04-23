@@ -6,6 +6,14 @@ import ks.common.model.Card;
 import ks.common.model.Move;
 import ks.common.model.Pile;
 
+/**
+ * 
+ * @author Tim Petri | tapetri@wpi.edu
+ * Apr 23, 2015 2015
+ *
+ * Move class for automatic move between the trunk and wing
+ *
+ */
 public class AutoTrunkToWingMove extends Move {
 
 	BuildablePile trunk;

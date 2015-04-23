@@ -15,6 +15,13 @@ import ks.common.view.Container;
 import ks.common.view.PileView;
 import ks.common.view.Widget;
 
+/**
+ * 
+ * @author Tim Petri | tapetri@wpi.edu
+ * Apr 23, 2015 2015
+ *
+ * Controller for foundation pile view
+ */
 public class EagleWingFoundationPileController extends SolitaireReleasedAdapter {
 
 	/** The EagleWing game */

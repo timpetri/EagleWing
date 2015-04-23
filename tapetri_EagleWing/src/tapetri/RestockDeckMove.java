@@ -6,6 +6,13 @@ import ks.common.model.Move;
 import ks.common.model.MutableInteger;
 import ks.common.model.Pile;
 
+/**
+ * 
+ * @author Tim Petri | tapetri@wpi.edu
+ * Apr 23, 2015 2015
+ * 
+ * Move class for restocking the deck from wastepile
+ */
 public class RestockDeckMove extends Move {
 
 	Pile wastePile;
