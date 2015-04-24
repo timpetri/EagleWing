@@ -107,12 +107,13 @@ public class EagleWing extends Solitaire {
 		trunkView.setUndoAdapter(new SolitaireUndoAdapter(this));
 
 
-
+		/*
 		// Ensure that any releases (and movement) are handled by the non-interactive widgets
 		numLeftView.setMouseMotionAdapter (new SolitaireMouseMotionAdapter(this));
 		numLeftView.setMouseAdapter (new SolitaireReleasedAdapter(this));
 		numLeftView.setUndoAdapter (new SolitaireUndoAdapter(this));
-
+		*/
+		
 		// same for scoreView
 		scoreView.setMouseMotionAdapter (new SolitaireMouseMotionAdapter(this));
 		scoreView.setMouseAdapter (new SolitaireReleasedAdapter(this));
@@ -166,20 +167,22 @@ public class EagleWing extends Solitaire {
 		scoreView.setFontSize(16);
 		scoreView.setBounds (20, 60+2*ci.getHeight(), 60, 20);
 		container.addWidget (scoreView);
-
+		
+		/*
 		numLeftView = new IntegerView (getNumLeft());
 		numLeftView.setFontSize (16);
 		numLeftView.setBounds (120, 60+2*ci.getHeight(), 60, 20);
 		container.addWidget (numLeftView);
+		*/
 
 		rankOfFoundView = new IntegerView (rankOfFoundation);
-		rankOfFoundView.setFontSize(22);
+		rankOfFoundView.setFontSize(28);
 		rankOfFoundView.setBounds (100 + 3*ci.getWidth(), 20, 60, 40);
 		container.addWidget (rankOfFoundView);
 
 		numRedealsView = new IntegerView (numRedeals);
-		numRedealsView.setFontSize(16);
-		numRedealsView.setBounds(220, 60 + 2*ci.getHeight(), 60, 20);
+		numRedealsView.setFontSize(28);
+		numRedealsView.setBounds(40 + 2*ci.getWidth(), 20, 60, 40);
 		container.addWidget(numRedealsView);		
 
 	}
